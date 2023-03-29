@@ -39,7 +39,7 @@ tape('write', function (t) {
     write: function (path, fd, buf, len, pos, cb) {
       buf.slice(0, len).copy(data, pos)
       size = Math.max(pos + len, size)
-      process.nextTick(cb, buf.length)
+      process.nextTick(cb, 0, buf.length)
     }
   }
 

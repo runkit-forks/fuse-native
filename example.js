@@ -59,9 +59,9 @@ const ops = {
   read: function (path, fd, buf, len, pos, cb) {
     console.log('read(%s, %d, %d, %d)', path, fd, len, pos)
     var str = 'hello world\n'.slice(pos)
-    if (!str) return process.nextTick(cb, 0)
+    if (!str) return process.nextTick(cb, 0, 0)
     buf.write(str)
-    return process.nextTick(cb, str.length)
+    return process.nextTick(cb, 0, str.length)
   }
 }
 

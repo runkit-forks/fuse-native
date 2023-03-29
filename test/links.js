@@ -30,9 +30,9 @@ tape('readlink', function (t) {
     },
     read: function (path, fd, buf, len, pos, cb) {
       var str = 'hello world'.slice(pos, pos + len)
-      if (!str) return process.nextTick(cb, 0)
+      if (!str) return process.nextTick(cb, 0, 0)
       buf.write(str)
-      return process.nextTick(cb, str.length)
+      return process.nextTick(cb, 0, str.length)
     }
   }
 

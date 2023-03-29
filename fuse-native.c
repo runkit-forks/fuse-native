@@ -370,7 +370,7 @@ FUSE_METHOD_VOID(releasedir, 2, 0, (const char *path, struct fuse_file_info *inf
   }
 })
 
-FUSE_METHOD(read, 6, 2, (const char *path, char *buf, size_t len, off_t offset, struct fuse_file_info *info), {
+FUSE_METHOD(read, 6, 1, (const char *path, char *buf, size_t len, off_t offset, struct fuse_file_info *info), {
   l->path = path;
   l->buf = buf;
   l->len = len;
@@ -383,10 +383,10 @@ FUSE_METHOD(read, 6, 2, (const char *path, char *buf, size_t len, off_t offset, 
   napi_create_uint32(env, l->len, &(argv[5]));
   FUSE_UINT64_TO_INTS_ARGV(l->offset, 6)
 }, {
-  if (IS_ARRAY_BUFFER_DETACH_SUPPORTED == 1) assert(napi_detach_arraybuffer(env, argv[3]) == napi_ok);
+  if (IS_ARRAY_BUFFER_DETACH_SUPPORTED == 1) assert(napi_detach_arraybuffer(env, argv[2]) == napi_ok);
 })
 
-FUSE_METHOD(write, 6, 2, (const char *path, const char *buf, size_t len, off_t offset, struct fuse_file_info *info), {
+FUSE_METHOD(write, 6, 1, (const char *path, const char *buf, size_t len, off_t offset, struct fuse_file_info *info), {
   l->path = path;
   l->buf = buf;
   l->len = len;
@@ -399,7 +399,7 @@ FUSE_METHOD(write, 6, 2, (const char *path, const char *buf, size_t len, off_t o
   napi_create_uint32(env, l->len, &(argv[5]));
   FUSE_UINT64_TO_INTS_ARGV(l->offset, 6)
 }, {
-  if (IS_ARRAY_BUFFER_DETACH_SUPPORTED == 1) assert(napi_detach_arraybuffer(env, argv[3]) == napi_ok);
+  if (IS_ARRAY_BUFFER_DETACH_SUPPORTED == 1) assert(napi_detach_arraybuffer(env, argv[2]) == napi_ok);
 })
 
 FUSE_METHOD(readdir, 1, 2, (const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *info), {
