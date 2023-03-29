@@ -640,11 +640,19 @@ class Fuse extends Nanoresource {
   unmount (cb) {
     return this.close(cb)
   }
-
-  errno (code) {
-    return (code && Fuse[code.toUpperCase()]) || -1
-  }
 }
+
+Fuse.toFuseErrorCode = function (error)
+{
+    if (typeof error === "number")
+        return error;
+
+    const code = error instanceof Error && error.code;
+
+    return code && typeof code === "string" && Fuse[code.toUpperCase()] || -1;
+}
+
+Fuse.Fuse = Fuse;
 
 Fuse.EPERM = -1
 Fuse.ENOENT = -2
