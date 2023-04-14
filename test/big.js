@@ -14,6 +14,7 @@ tape('read and write big file', function (t) {
   let size = 0
   const reads = [0, 4 * 1024 * 1024 * 1024, 6 * 1024 * 1024 * 1024]
   const writes = [0, 4 * 1024 * 1024 * 1024, 6 * 1024 * 1024 * 1024]
+  if (process.arch === 'arm64') reads.splice(1, 0, 16384)
 
   var ops = {
     force: true,
